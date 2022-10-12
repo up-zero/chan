@@ -1,0 +1,26 @@
+{
+  "server": [
+    {
+      "listen": ":80",
+      "server_name": "localhost",
+      "location": [
+        {
+          "path": "/",
+          "index": ["index.html", "index.htm"],
+          "root": "./"
+        }
+      ]
+    },
+    {
+      "listen": ":8080",
+      "server_name": "adc.com",
+      "location": [
+        {
+          "path": "/",
+          "index": ["index.html", "index.htm"],
+          "root": "./test/static"
+        }
+      ]
+    }
+  ]
+}

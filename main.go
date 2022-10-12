@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
+	service.NewService()
 	util.Info("[SERVER] RUNNING ...")
 	http.HandleFunc("/", service.HttpHandle)
-	http.ListenAndServe(":80", nil)
+
+	// 监听配置的所有端口
+	service.ListenAndServer()
 }
