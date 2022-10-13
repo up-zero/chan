@@ -7,17 +7,30 @@
         {
           "path": "/",
           "index": ["index.html", "index.htm"],
-          "root": "./"
+          "root": "./test/static"
         }
       ]
     },
     {
-      "listen": ":8080",
+      "listen": ":80",
       "server_name": "adc.com",
       "location": [
         {
           "path": "/",
-          "index": ["index.html", "index.htm"],
+          "index": ["adc.html"],
+          "root": "./test/static"
+        }
+      ]
+    },
+    {
+      "listen": ":443",
+      "server_name": "test.getcharzp.cn",
+      "ssl_cert": "./conf/ssl/test.getcharzp.cn/test.getcharzp.cn_bundle.pem",
+      "ssl_key": "./conf/ssl/test.getcharzp.cn/test.getcharzp.cn.key",
+      "location": [
+        {
+          "path": "/",
+          "index": ["test.html"],
           "root": "./test/static"
         }
       ]

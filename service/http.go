@@ -11,13 +11,17 @@ import (
 
 func HttpHandle(w http.ResponseWriter, r *http.Request) {
 	host := r.Host
+	fmt.Println("RUN")
 	if !strings.Contains(host, ":") {
-		host += ":80"
-	}
-	if _, ok := Srv.Server[host]; !ok {
-		w.WriteHeader(http.StatusBadGateway)
-		w.Write([]byte("502 Bad Gateway"))
-		return
+		if _, ok := Srv.Server[host+":80"]; ok {
+			host = host + ":80"
+		} else if _, ok := Srv.Server[host+":443"]; ok {
+			host = host + ":443"
+		} else {
+			w.WriteHeader(http.StatusBadGateway)
+			w.Write([]byte("502 Bad Gateway"))
+			return
+		}
 	}
 
 	for _, v := range Srv.Server[host].Location {
