@@ -34,6 +34,19 @@
           "root": "./test/static"
         }
       ]
+    },
+    {
+      "listen": ":443",
+      "server_name": "test2.getcharzp.cn",
+      "ssl_cert": "./conf/ssl/test2.getcharzp.cn/test2.getcharzp.cn_bundle.pem",
+      "ssl_key": "./conf/ssl/test2.getcharzp.cn/test2.getcharzp.cn.key",
+      "location": [
+        {
+          "path": "/",
+          "index": ["test2.html"],
+          "root": "./test/static"
+        }
+      ]
     }
   ]
 }
