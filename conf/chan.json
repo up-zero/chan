@@ -12,6 +12,15 @@
       ]
     },
     {
+      "listen": ":8010",
+      "server_name": "localhost",
+      "location": [
+        {
+          "proxy_pass": "http://localhost:8080"
+        }
+      ]
+    },
+    {
       "listen": ":80",
       "server_name": "adc.com",
       "location": [
