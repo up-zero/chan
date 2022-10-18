@@ -13,7 +13,6 @@ import (
 
 func HttpHandle(w http.ResponseWriter, r *http.Request) {
 	host := r.Host
-	fmt.Println("RUN")
 	if !strings.Contains(host, ":") {
 		if _, ok := Srv.Server[host+":80"]; ok {
 			host = host + ":80"
@@ -29,7 +28,29 @@ func HttpHandle(w http.ResponseWriter, r *http.Request) {
 	for _, v := range Srv.Server[host].Location {
 		if len(r.RequestURI) >= len(v.Path) && v.Path == r.RequestURI[:len(v.Path)] {
 			if v.ProxyPass != "" { // 代理服务
-				backendURL, err := url.Parse(v.ProxyPass)
+				proxyPass := v.ProxyPass // 代理地址
+				upstream := Srv.Server[host].Upstream
+				if upstream != nil {
+					if len(upstream.Values) == 0 {
+						w.WriteHeader(http.StatusBadGateway)
+						w.Write([]byte("502 Bad Gateway"))
+						return
+					}
+					beginIndex := 0
+					index := 0
+					for i, value := range upstream.Values {
+						endIndex := beginIndex + value.Weight
+						if beginIndex <= upstream.Counter && upstream.Counter < endIndex {
+							index = i
+							break
+						}
+						beginIndex = endIndex
+					}
+					value := upstream.Values[index].Value
+					proxyPass = strings.ReplaceAll(proxyPass, upstream.Name, value)
+					upstream.Counter = (upstream.Counter + 1) % upstream.Weights
+				}
+				backendURL, err := url.Parse(proxyPass)
 				if err != nil {
 					w.WriteHeader(http.StatusBadGateway)
 					w.Write([]byte("502 Bad Gateway"))

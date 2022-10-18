@@ -6,7 +6,10 @@
       "location": [
         {
           "path": "/",
-          "index": ["index.html", "index.htm"],
+          "index": [
+            "index.html",
+            "index.htm"
+          ],
           "root": "./test/static"
         }
       ]
@@ -21,12 +24,37 @@
       ]
     },
     {
+      "listen": ":8011",
+      "server_name": "localhost",
+      "upstream": {
+        "name": "servers",
+        "values": [
+          {
+            "value": "http://localhost:8080",
+            "weight": 1
+          },
+          {
+            "value": "http://localhost:8081",
+            "weight": 2
+          }
+        ]
+      },
+      "location": [
+        {
+          "path": "/web",
+          "proxy_pass": "servers"
+        }
+      ]
+    },
+    {
       "listen": ":80",
       "server_name": "adc.com",
       "location": [
         {
           "path": "/",
-          "index": ["adc.html"],
+          "index": [
+            "adc.html"
+          ],
           "root": "./test/static"
         }
       ]
@@ -39,7 +67,9 @@
       "location": [
         {
           "path": "/",
-          "index": ["test.html"],
+          "index": [
+            "test.html"
+          ],
           "root": "./test/static"
         }
       ]
@@ -52,7 +82,9 @@
       "location": [
         {
           "path": "/",
-          "index": ["test2.html"],
+          "index": [
+            "test2.html"
+          ],
           "root": "./test/static"
         }
       ]

@@ -39,6 +39,18 @@ func NewService() {
 			}
 			srv.Certificates = append(srv.Certificates, cert)
 		}
+		// upstream
+		upstream := v.Upstream
+		if upstream != nil {
+			weights := 0
+			for i, value := range upstream.Values {
+				if value.Weight == 0 {
+					upstream.Values[i].Weight = define.DefaultWeight
+				}
+				weights += upstream.Values[i].Weight
+			}
+			upstream.Weights = weights
+		}
 	}
 	if len(srv.Certificates) > 0 {
 		srv.TlsConfig = new(tls.Config)

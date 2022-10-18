@@ -9,12 +9,21 @@ import (
 )
 
 // 启动 8080 服务，用于被代理
-func TestRunServer(t *testing.T) {
+func TestRunServer1(t *testing.T) {
 	http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-		writer.Write([]byte(request.RequestURI))
+		writer.Write([]byte("8080:" + request.RequestURI))
 	})
 	fmt.Println("SERVER RUNNING 8080 ......")
 	http.ListenAndServe(":8080", nil)
+}
+
+// 启动 8081 服务，用于被代理
+func TestRunServer2(t *testing.T) {
+	http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+		writer.Write([]byte("8081:" + request.RequestURI))
+	})
+	fmt.Println("SERVER RUNNING 8081 ......")
+	http.ListenAndServe(":8081", nil)
 }
 
 // 启动 8000 服务，用于程序的入口
