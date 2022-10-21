@@ -1,16 +1,22 @@
 package main
 
 import (
-	"gitee.com/up-zero/chan/service"
-	"gitee.com/up-zero/chan/util"
-	"net/http"
+	"gitee.com/up-zero/chan/service/cli"
+	"os"
+	"strings"
 )
 
 func main() {
-	service.NewService()
-	util.Info("[SERVER] RUNNING ...")
-	http.HandleFunc("/", service.HttpHandle)
+	args := os.Args
+	if len(args) <= 1 {
+		cli.CommandUsage()
+		return
+	}
 
-	// 监听配置的所有端口
-	service.ListenAndServer()
+	switch strings.ToUpper(args[1]) {
+	case "VERSION":
+		cli.Version()
+	case "RUN":
+		cli.Run(args)
+	}
 }

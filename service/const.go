@@ -16,12 +16,18 @@ type Service struct {
 
 var Srv *Service
 
-func NewService() {
+func NewService(confPath string) {
 	srv := new(Service)
 	server := make(map[string]define.Server)
 	conf := new(define.ChanConf)
 	// conf
-	confByte, err := ioutil.ReadFile("./conf/chan.json")
+	confByte, err := json.Marshal(define.DefaultChanConf)
+	if err != nil {
+		panic("[ERROR MARSHAL] : " + err.Error())
+	}
+	if confPath != "" {
+		confByte, err = ioutil.ReadFile(confPath)
+	}
 	if err != nil {
 		panic("[ERROR READ CONF] : " + err.Error())
 	}
