@@ -16,19 +16,27 @@
 + [ ] 命令行
     + [x] version 获取版本
     + [x] run 运行
-    + [ ] start 启动
-    + [ ] stop 停止
-    + [ ] restart 重启
+    + [x] start 启动
+    + [x] stop 停止
+    + [x] restart 重启
     + [ ] conf 获取配置文件路径
-+ [ ] 服务运行
 
 ## 快速上手
 
-+ 运行
++ 运行(run)
 ```shell
 # 不指定配置文件，默认在80端口启动一个服务
 chan run
 # 使用指定的配置文件路径启动Web服务
 chan run -t 配置文件路径
 chan run -t ./conf/chan.json
+```
+
++ 启动(start)，支持后台运行
+```shell
+# 不指定配置文件，默认在80端口启动一个服务
+chan start
+# 使用指定的配置文件路径启动Web服务
+chan start -t 配置文件路径
+chan start -t ./conf/chan.json
 ```
