@@ -18,5 +18,7 @@ func main() {
 		cli.Version()
 	case "RUN":
 		cli.Run(args)
+	case "START":
+		cli.Start(args)
 	}
 }

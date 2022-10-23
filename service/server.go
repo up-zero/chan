@@ -14,6 +14,7 @@ func ListenAndServer() {
 				go func() {
 					err := listenAndServeTLS()
 					if err != nil {
+						util.Error("[LISTEN ERROR] : " + err.Error())
 						panic("[LISTEN ERROR] : " + err.Error())
 					}
 				}()
@@ -22,6 +23,7 @@ func ListenAndServer() {
 					err := http.ListenAndServe(vv.Listen, nil)
 					if err != nil {
 						util.Error("[LISTEN ERROR] : " + err.Error())
+						panic("[LISTEN ERROR] : " + err.Error())
 					}
 				}()
 			}
