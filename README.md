@@ -13,17 +13,18 @@
 + [x] 负载均衡
     + [x] 轮询
     + [x] 加权轮询
-+ [ ] 命令行
++ [x] 命令行
     + [x] version 获取版本
     + [x] run 运行
     + [x] start 启动
     + [x] stop 停止
     + [x] restart 重启
-    + [ ] conf 获取配置文件路径
+    + [x] conf 获取配置文件路径
 
 ## 快速上手
 
 + 运行(run)
+
 ```shell
 # 不指定配置文件，默认在80端口启动一个服务
 chan run
@@ -33,6 +34,7 @@ chan run -t ./conf/chan.json
 ```
 
 + 启动(start)，支持后台运行
+
 ```shell
 # 不指定配置文件，默认在80端口启动一个服务
 chan start
@@ -42,11 +44,13 @@ chan start -t ./conf/chan.json
 ```
 
 + 停止(stop)
+
 ```shell
 chan stop 
 ```
 
 + 重启(restart)
+
 ```shell
 # 不指定配置文件，默认在80端口启动一个服务
 chan restart 
@@ -54,3 +58,10 @@ chan restart
 chan restart -t 配置文件路径
 chan restart -t ./conf/chan.json
 ```
+
++ 配置(conf)
+
+```shell
+chan conf 
+```
+

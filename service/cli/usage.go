@@ -15,5 +15,8 @@ func CommandUsage() {
 	t.Append([]string{"version", "chan version", "no"})
 	t.Append([]string{"run", "chan run", "-t config file path"})
 	t.Append([]string{"start", "chan start , can backend run", "-t config file path"})
+	t.Append([]string{"stop", "chan stop", "no"})
+	t.Append([]string{"restart", "chan restart , can backend run", "-t config file path"})
+	t.Append([]string{"conf", "chan conf", "no"})
 	t.Render()
 }

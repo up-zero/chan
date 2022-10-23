@@ -15,8 +15,8 @@ func Run(args []string) {
 	service.NewService(confPath)
 	util.Info("START RUNNING ...")
 	http.HandleFunc("/", service.HttpHandle)
-	// 保存 ProcessID
-	util.SaveProcessId()
+	// 保存 Process
+	util.SaveProcess(confPath)
 	// 监听配置的所有端口
 	service.ListenAndServer()
 }

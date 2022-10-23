@@ -24,5 +24,7 @@ func main() {
 		cli.Stop()
 	case "RESTART":
 		cli.Restart(args)
+	case "CONF":
+		cli.Conf()
 	}
 }
