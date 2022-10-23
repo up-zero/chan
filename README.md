@@ -40,3 +40,17 @@ chan start
 chan start -t 配置文件路径
 chan start -t ./conf/chan.json
 ```
+
++ 停止(stop)
+```shell
+chan stop 
+```
+
++ 重启(restart)
+```shell
+# 不指定配置文件，默认在80端口启动一个服务
+chan restart 
+# 使用指定的配置文件路径启动Web服务
+chan restart -t 配置文件路径
+chan restart -t ./conf/chan.json
+```

@@ -13,7 +13,7 @@ func Run(args []string) {
 		confPath = args[3]
 	}
 	service.NewService(confPath)
-	util.Info("[SERVER] RUNNING ...")
+	util.Info("START RUNNING ...")
 	http.HandleFunc("/", service.HttpHandle)
 	// 保存 ProcessID
 	util.SaveProcessId()

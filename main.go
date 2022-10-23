@@ -22,5 +22,7 @@ func main() {
 		cli.Start(args)
 	case "STOP":
 		cli.Stop()
+	case "RESTART":
+		cli.Restart(args)
 	}
 }
