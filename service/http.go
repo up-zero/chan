@@ -36,19 +36,11 @@ func HttpHandle(w http.ResponseWriter, r *http.Request) {
 						w.Write([]byte("502 Bad Gateway"))
 						return
 					}
-					beginIndex := 0
-					index := 0
-					for i, value := range upstream.Values {
-						endIndex := beginIndex + value.Weight
-						if beginIndex <= upstream.Counter && upstream.Counter < endIndex {
-							index = i
-							break
-						}
-						beginIndex = endIndex
+					if upstream.Method == "ip_hash" { // ip_hash
+						proxyPass = upstream.IpHash(proxyPass, r.RemoteAddr)
+					} else { // 默认，轮询、加权轮询
+						proxyPass = upstream.RoundRobin(proxyPass)
 					}
-					value := upstream.Values[index].Value
-					proxyPass = strings.ReplaceAll(proxyPass, upstream.Name, value)
-					upstream.Counter = (upstream.Counter + 1) % upstream.Weights
 				}
 				backendURL, err := url.Parse(proxyPass)
 				if err != nil {
@@ -81,7 +73,6 @@ func HttpHandle(w http.ResponseWriter, r *http.Request) {
 				if index > 0 {
 					filePath = filePath[:index]
 				}
-				fmt.Println(filePath)
 				data, err := ioutil.ReadFile(filePath)
 				if err != nil {
 					w.WriteHeader(http.StatusNotFound)

@@ -47,6 +47,30 @@
       ]
     },
     {
+      "listen": ":8012",
+      "server_name": "localhost",
+      "upstream": {
+        "name": "servers",
+        "method": "ip_hash",
+        "values": [
+          {
+            "value": "http://localhost:8080",
+            "weight": 1
+          },
+          {
+            "value": "http://localhost:8081",
+            "weight": 2
+          }
+        ]
+      },
+      "location": [
+        {
+          "path": "/web",
+          "proxy_pass": "servers"
+        }
+      ]
+    },
+    {
       "listen": ":80",
       "server_name": "adc.com",
       "location": [
